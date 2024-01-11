@@ -1,7 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { AccountsPage } from "./pages/AccountsPage";
+import { Accounts } from "./pages/Accounts/Accounts";
+import { AccountDetails } from "./pages/AccountDetails/AccountDetails";
+import "./main.scss";
 
 const root = createRoot(document.getElementById("root"));
 const router = createBrowserRouter([
@@ -19,7 +21,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/accounts",
-    element: <AccountsPage />,
+    element: <Accounts />,
+  },
+  {
+    path: "/accounts/:id",
+    element: <AccountDetails />,
   },
 ]);
 

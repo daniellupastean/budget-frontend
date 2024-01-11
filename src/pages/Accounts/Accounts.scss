@@ -1,0 +1,19 @@
+.accounts-page {
+  .header-section {
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 26px;
+  }
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 40px;
+
+    .card {
+      padding: 20px;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+  }
+}
