@@ -8,9 +8,7 @@ export const Accounts = () => {
     data: accounts,
     loading,
     error,
-  } = useFetch(
-    "http://localhost:5000/bank-accounts/user/17905c36-3997-4528-b893-20134512cafb"
-  );
+  } = useFetch(`http://localhost:5000/bank-accounts/user/${import.meta.env.VITE_CURRENT_USER}`);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

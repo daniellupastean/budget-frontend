@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Accounts } from "./pages/Accounts/Accounts";
 import { AccountDetails } from "./pages/AccountDetails/AccountDetails";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 import "./main.scss";
 
 const root = createRoot(document.getElementById("root"));
@@ -31,6 +32,9 @@ const router = createBrowserRouter([
 
 root.render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Sidebar />
+    <div className="content">
+      <RouterProvider router={router} />
+    </div>
   </StrictMode>
 );
