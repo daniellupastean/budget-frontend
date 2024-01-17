@@ -1,6 +1,7 @@
 import React from "react";
 import useFetch from "../../hooks/useFetch";
 import "./Accounts.scss";
+import { AccountCard } from "../../components/AccountCard/AccountCard";
 import { Link } from "react-router-dom";
 
 export const Accounts = () => {
@@ -15,14 +16,14 @@ export const Accounts = () => {
 
   return (
     <div className="accounts-page">
-      <div className="header-section">Conturile tale</div>
+      <div className="header-section">
+        <div>Conturile tale</div>
+      </div>
       <div className="wrapper">
-        {accounts &&
-          accounts.map((account, index) => (
-            <Link to={`/accounts/${account.id}`} className="card" key={index}>
-              {account.name}
-            </Link>
-          ))}
+        {accounts && accounts.map((account) => <AccountCard account={account} key={account.id} />)}
+        <Link className="add-account-btn" to="/accounts/create">
+          +
+        </Link>
       </div>
     </div>
   );

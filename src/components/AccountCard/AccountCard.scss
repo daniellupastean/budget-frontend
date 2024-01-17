@@ -1,0 +1,16 @@
+.card {
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  color: #202020;
+  background-color: #ffffff;
+  user-select: none;
+  width: 240px;
+  height: auto;
+
+  &:hover {
+    background-color: #f9f9ff;
+  }
+}

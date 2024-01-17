@@ -1,5 +1,13 @@
 .sidebar {
-  background-color: #d6d6d6;
-  width: 300px;
+  flex-shrink: 0;
+  background-color: #ffffff;
   min-height: 100vh;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+
+  .react-resizable-handle {
+    height: 100%;
+    width: 15px;
+    cursor: col-resize;
+    background-image: none;
+  }
 }

@@ -5,6 +5,7 @@ import { Accounts } from "./pages/Accounts/Accounts";
 import { AccountDetails } from "./pages/AccountDetails/AccountDetails";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import "./main.scss";
+import { CreateAccount } from "./pages/CreateAccount/CreateAccount";
 
 const root = createRoot(document.getElementById("root"));
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/accounts",
     element: <Accounts />,
+  },
+  {
+    path: "/accounts/create",
+    element: <CreateAccount />,
   },
   {
     path: "/accounts/:id",

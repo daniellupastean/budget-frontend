@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (url) => {
+const useFetch = (url, method = "GET", body = null) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     setLoading(true);
-    fetch(url)
+    fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: method !== "GET" && method !== "HEAD" ? JSON.stringify(body) : null,
+    })
       .then((response) => response.json())
       .then((data) => {
         setData(data);
@@ -17,7 +23,7 @@ const useFetch = (url) => {
         setError(error);
         setLoading(false);
       });
-  }, [url]); // Dependency array with url ensures the hook reruns when the URL changes
+  }, [url, method, body]); // Added method and body to the dependency array
 
   return { data, loading, error };
 };
