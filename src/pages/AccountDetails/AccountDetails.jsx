@@ -30,7 +30,7 @@ export const AccountDetails = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, balance }),
+        body: JSON.stringify({ name, balance, userId: import.meta.env.VITE_CURRENT_USER }),
       });
       if (response.ok) {
         navigate("/accounts");
