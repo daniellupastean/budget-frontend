@@ -6,16 +6,23 @@ import { AccountDetails } from "./pages/AccountDetails/AccountDetails";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import "./main.scss";
 import { CreateAccount } from "./pages/CreateAccount/CreateAccount";
+import { Home } from "./pages/Home/Home";
+import { Layout } from "./components/Layout/Layout";
+import Login from "./pages/Login/Login";
 
 const root = createRoot(document.getElementById("root"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Home Page</div>,
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
   },
   {
     path: "/login",
-    element: <div>Login Page</div>,
+    element: <Login />,
   },
   {
     path: "/register",
@@ -23,23 +30,36 @@ const router = createBrowserRouter([
   },
   {
     path: "/accounts",
-    element: <Accounts />,
+    element: (
+      <Layout>
+        <Accounts />
+      </Layout>
+    ),
   },
   {
     path: "/accounts/create",
-    element: <CreateAccount />,
+    element: (
+      <Layout>
+        <CreateAccount />
+      </Layout>
+    ),
   },
   {
     path: "/accounts/:id",
-    element: <AccountDetails />,
+    element: (
+      <Layout>
+        <AccountDetails />
+      </Layout>
+    ),
+  },
+  {
+    path: "/transactions",
+    element: <Layout>Transactions</Layout>,
   },
 ]);
 
 root.render(
   <StrictMode>
-    <Sidebar />
-    <div className="content">
-      <RouterProvider router={router} />
-    </div>
+    <RouterProvider router={router} />
   </StrictMode>
 );

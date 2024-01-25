@@ -3,11 +3,36 @@
   background-color: #ffffff;
   min-height: 100vh;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  padding: 16px;
+
+  .app-name {
+    display: flex;
+    font-weight: 500;
+    font-size: 20px;
+    width: 100%;
+    text-decoration: none;
+    padding: 10px;
+  }
 
   .react-resizable-handle {
     height: 100%;
     width: 15px;
     cursor: col-resize;
     background-image: none;
+  }
+
+  .nav-items {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    a {
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 10px;
+      &:hover {
+        background-color: #f9f9ff;
+      }
+    }
   }
 }

@@ -38,6 +38,22 @@ export const AccountDetails = () => {
     } catch (error) {}
   };
 
+  const handleDeleteAccount = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:5000/bank-accounts/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: import.meta.env.VITE_CURRENT_USER }),
+      });
+      if (response.ok) {
+        navigate("/accounts");
+      }
+    } catch (error) {}
+  };
+
   return (
     <div className="account-details">
       <div className="header-section">
@@ -47,25 +63,30 @@ export const AccountDetails = () => {
             navigate("/accounts");
           }}
         >
-          înapoi
+          BACK
         </div>
-        <div>Detalii cont</div>
+        <div>Account Details</div>
       </div>
       <form onSubmit={handleUpdateAccount}>
         <div className="input-wrapper">
-          <label htmlFor="name">Numele contului</label>
+          <label htmlFor="name">Account Name</label>
           <input type="text" value={name} id="name" onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="input-wrapper">
-          <label htmlFor="balance">Soldul contului - {account.currency}</label>
+          <label htmlFor="balance">Account Balance - {account.currency}</label>
           <input type="number" value={balance} id="balance" onChange={(e) => setBalance(e.target.value)} />
         </div>
 
         <div className="input-wrapper">
-          <label htmlFor="bank-name">Banca</label>
+          <label htmlFor="bank-name">Bank</label>
           <input type="text" value={account.bankName} id="bank-name" disabled />
         </div>
-        <button type="submit">Salvează</button>
+        <button className="save-btn" type="submit">
+          Save
+        </button>
+        <button className="delete-btn" onClick={handleDeleteAccount}>
+          Delete
+        </button>
       </form>
     </div>
   );

@@ -53,17 +53,17 @@ export const CreateAccount = () => {
             navigate("/accounts");
           }}
         >
-          înapoi
+          BACK
         </div>
-        <div>Creare cont</div>
+        <div>Create Bank Account</div>
       </div>
       <form onSubmit={handleCreateAccount}>
         <div className="input-wrapper">
-          <label htmlFor="name">Numele contului</label>
+          <label htmlFor="name">Account Name</label>
           <input type="text" value={name} id="name" onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="input-wrapper">
-          <label htmlFor="currency">Moneda</label>
+          <label htmlFor="currency">Currency</label>
           <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
             <option value="LEI">LEI</option>
             <option value="€">EURO</option>
@@ -71,12 +71,12 @@ export const CreateAccount = () => {
           </select>
         </div>
         <div className="input-wrapper">
-          <label htmlFor="balance">Soldul contului</label>
+          <label htmlFor="balance">Balance</label>
           <input type="number" value={balance} id="balance" onChange={(e) => setBalance(e.target.value)} />
         </div>
 
         <div className="input-wrapper">
-          <label htmlFor="bank-name">Banca</label>
+          <label htmlFor="bank-name">Bank</label>
           <select id="cars" value={selectedBank} onChange={(e) => setSelectedBank(e.target.value)}>
             {banks.map((bank) => (
               <option value={bank.id} key={bank.id}>
@@ -86,7 +86,9 @@ export const CreateAccount = () => {
           </select>
         </div>
 
-        <button type="submit">Salvează</button>
+        <button className="save-btn" type="submit">
+          Save
+        </button>
       </form>
     </div>
   );

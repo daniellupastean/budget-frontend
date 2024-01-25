@@ -17,7 +17,7 @@ export const Accounts = () => {
   return (
     <div className="accounts-page">
       <div className="header-section">
-        <div>Conturile tale</div>
+        <div>Bank Accounts</div>
       </div>
       <div className="wrapper">
         {accounts && accounts.map((account) => <AccountCard account={account} key={account.id} />)}
