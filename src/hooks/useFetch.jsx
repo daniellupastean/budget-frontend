@@ -5,12 +5,15 @@ const useFetch = (url, method = "GET", body = null) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     setLoading(true);
     fetch(url, {
       method: method,
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: method !== "GET" && method !== "HEAD" ? JSON.stringify(body) : null,
     })

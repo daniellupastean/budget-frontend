@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import "./CreateAccount.scss";
+import { API_URL } from "../../utils/constants";
 
 export const CreateAccount = () => {
-  const { data: banks, loading, error } = useFetch(`http://localhost:5000/banks`);
+  const { data: banks, loading, error } = useFetch(`${API_URL}/banks`);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
 
   const [name, setName] = useState("");
   const [balance, setBalance] = useState("");
@@ -25,16 +28,17 @@ export const CreateAccount = () => {
   const handleCreateAccount = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/bank-accounts`, {
+      const response = await fetch(`${API_URL}/bank-accounts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           name,
           balance,
           currency,
-          userId: import.meta.env.VITE_CURRENT_USER,
+          userId: user.id,
           bankId: selectedBank,
         }),
       });

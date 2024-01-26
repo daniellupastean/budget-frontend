@@ -1,14 +1,41 @@
 import { useState } from "react";
 import "./Login.scss";
+import { API_URL } from "../../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle login logic here
-    console.log("Login with:", email, password);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const loginResponse = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (loginResponse.ok) {
+        const loginData = await loginResponse.json();
+        localStorage.setItem("token", loginData?.accessToken);
+        const userDataResponse = await fetch(`${API_URL}/auth/me`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${loginData.accessToken}`,
+          },
+        });
+        if (userDataResponse.ok) {
+          const userData = await userDataResponse.json();
+          localStorage.setItem("user", JSON.stringify(userData));
+          navigate("/accounts");
+        }
+      }
+    } catch (error) {}
   };
 
   return (

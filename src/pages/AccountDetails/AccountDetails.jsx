@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import "./AccountDetails.scss";
+import { API_URL } from "../../utils/constants";
 
 export const AccountDetails = () => {
   const { id } = useParams();
-  const { data: account, loading, error } = useFetch(`http://localhost:5000/bank-accounts/${id}`);
+  const { data: account, loading, error } = useFetch(`${API_URL}/bank-accounts/${id}`);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
 
   const [name, setName] = useState("");
   const [balance, setBalance] = useState("");
@@ -25,12 +28,13 @@ export const AccountDetails = () => {
   const handleUpdateAccount = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/bank-accounts/${id}`, {
+      const response = await fetch(`${API_URL}/bank-accounts/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ name, balance, userId: import.meta.env.VITE_CURRENT_USER }),
+        body: JSON.stringify({ name, balance, userId: user.id }),
       });
       if (response.ok) {
         navigate("/accounts");
@@ -41,12 +45,13 @@ export const AccountDetails = () => {
   const handleDeleteAccount = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/bank-accounts/${id}`, {
+      const response = await fetch(`${API_URL}/bank-accounts/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ userId: import.meta.env.VITE_CURRENT_USER }),
+        body: JSON.stringify({ userId: user.id }),
       });
       if (response.ok) {
         navigate("/accounts");

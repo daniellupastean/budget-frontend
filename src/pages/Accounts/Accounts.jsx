@@ -3,13 +3,11 @@ import useFetch from "../../hooks/useFetch";
 import "./Accounts.scss";
 import { AccountCard } from "../../components/AccountCard/AccountCard";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../utils/constants";
 
 export const Accounts = () => {
-  const {
-    data: accounts,
-    loading,
-    error,
-  } = useFetch(`http://localhost:5000/bank-accounts/user/${import.meta.env.VITE_CURRENT_USER}`);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const { data: accounts, loading, error } = useFetch(`${API_URL}/bank-accounts/user/${user.id}`);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
